@@ -7897,34 +7897,16 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _user$project$ClipboardTest$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
-};
-var _user$project$ClipboardTest$init = {ctor: '_Tuple2', _0: '', _1: _elm_lang$core$Platform_Cmd$none};
-var _user$project$ClipboardTest$clip = _elm_lang$core$Native_Platform.outgoingPort(
-	'clip',
-	function (v) {
-		return v;
-	});
 var _user$project$ClipboardTest$update = F2(
 	function (action, model) {
 		var _p0 = action;
-		switch (_p0.ctor) {
-			case 'Change':
-				return {ctor: '_Tuple2', _0: _p0._0, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'Clip':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: _user$project$ClipboardTest$clip(model)
-				};
-			default:
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		if (_p0.ctor === 'Change') {
+			return _p0._0;
+		} else {
+			return model;
 		}
 	});
-var _user$project$ClipboardTest$Clip = function (a) {
-	return {ctor: 'Clip', _0: a};
-};
+var _user$project$ClipboardTest$init = '';
 var _user$project$ClipboardTest$Change = function (a) {
 	return {ctor: 'Change', _0: a};
 };
@@ -7940,6 +7922,7 @@ var _user$project$ClipboardTest$view = function (model) {
 				_elm_lang$core$Native_List.fromArray(
 					[
 						_elm_lang$html$Html_Attributes$type$('text'),
+						_elm_lang$html$Html_Attributes$id('clipbait'),
 						_elm_lang$html$Html_Events$onInput(_user$project$ClipboardTest$Change)
 					]),
 				_elm_lang$core$Native_List.fromArray(
@@ -7948,18 +7931,18 @@ var _user$project$ClipboardTest$view = function (model) {
 				_elm_lang$html$Html$button,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Events$onClick(
-						_user$project$ClipboardTest$Clip(model))
+						A2(_elm_lang$html$Html_Attributes$attribute, 'data-clipboard-target', '#clipbait')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('Clip Me')
+						_elm_lang$html$Html$text(
+						A2(_elm_lang$core$Basics_ops['++'], 'Clip:  ', model))
 					]))
 			]));
 };
 var _user$project$ClipboardTest$main = {
-	main: _elm_lang$html$Html_App$program(
-		{init: _user$project$ClipboardTest$init, view: _user$project$ClipboardTest$view, update: _user$project$ClipboardTest$update, subscriptions: _user$project$ClipboardTest$subscriptions})
+	main: _elm_lang$html$Html_App$beginnerProgram(
+		{model: _user$project$ClipboardTest$init, view: _user$project$ClipboardTest$view, update: _user$project$ClipboardTest$update})
 };
 var _user$project$ClipboardTest$NoOp = {ctor: 'NoOp'};
 
